@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 
 import {FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms"
+import { AuthService } from '../../core/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-register',
@@ -9,6 +14,12 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+
+  isLoading = false;
+  constructor(private authService: AuthService , private toastr: ToastrService , private router: Router) {
+    // authService. <
+
+  }
 
   // !!!!1- ReactiveFormsModule
   //! 2- build form at ts file
@@ -36,11 +47,34 @@ export class RegisterComponent {
     if(this.registerGroup.invalid) return;
 
 
+    this.isLoading = true;
+    this.authService.register(this.registerGroup.value)
+    .subscribe(  {
+      next: (response) => {
+        this.isLoading = false;
+        this.toastr.success("Registration successful!", "Success");
+        // !!! navigate home page 
+        console.log("Registration successful:", response);
+        const token = response.token;
+        localStorage.setItem('token', token);
+        this.authService.decodeToken(token);
+
+
+
+        this.registerGroup.reset();
+        // /home/1254/view/edit
+        this.router.navigate(['/home'] )
+      },
+      error: (error) => {
   
+        this.isLoading = false;
 
-    // !!! 
-
-    alert("call api[")
+        if (error?.error?.message) {
+          this.toastr.error(error.error.message, 'Error');
+        }
+       
+      }
+    })
 
     
   }

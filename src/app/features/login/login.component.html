@@ -1,1 +1,73 @@
-<p>login works!</p>
+<div class="py-12">
+    <h2 class="text-2xl font-bold text-green-500">login Form</h2>
+
+
+
+    <form (ngSubmit)="handleSubmit()" [formGroup]="loginGroup" class="mx-auto my-7">
+
+
+
+        <!-- !! api { name , email , password , rePassword , phone } -->
+
+        <div class="relative z-0 w-full mb-5 group">
+            <input formControlName="email" type="text" [name]="'floating_' + 'email'" [id]="'floating_' + 'email'"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                placeholder=" " required />
+            <label [for]="'floating_' + 'email' "
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                email
+            </label>
+        </div>
+
+        @if(emailController?.touched && emailController?.errors){
+        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <p>{{emailErrorMsg}}</p>
+        </div>
+        }
+
+
+
+
+
+
+
+
+  
+
+
+
+        <div class="relative z-0 w-full mb-5 group">
+            <input [class.!border-b-red-500]="passwordController?.touched && passwordController?.errors" formControlName="password" type="text" [name]="'floating_' + 'password'"
+                [id]="'floating_' + 'password'"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-green-500 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                placeholder=" " required />
+            <label [class.!text-red-500]="passwordController?.touched && passwordController?.errors" [for]="'floating_' + 'password' "
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-focus:dark:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                password
+            </label>
+        </div>
+
+
+        @if(passwordController?.touched && passwordController?.errors){
+        <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <p>{{passwordErrorMsg}}</p>
+        </div>
+        }
+
+
+
+
+
+
+        <button [disabled]="loginGroup.invalid || isLoading" type="submit"
+            class=" disabled:opacity-50 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+        @if(isLoading){
+            loading....
+        }@else { 
+            Submit
+        }
+        
+        </button>
+    </form>
+
+</div>

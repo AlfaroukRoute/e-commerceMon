@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FlowbiteService } from '../../../core/services/flowbite.service';
 import { initFlowbite } from 'flowbite';
-import { RouterLink, RouterLinkActive } from "@angular/router";
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink , RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent implements OnInit {
+  localIsLogin = false;
   pages: { title: string; path: string }[] = [
     { path: 'home', title: 'Home' },
     { path: 'products', title: 'Products' },
@@ -18,13 +20,21 @@ export class NavbarComponent implements OnInit {
     { path: 'cart', title: 'Cart' },
   ];
 
-
   authPages: { title: string; path: string }[] = [
     { path: 'login', title: 'Login' },
     { path: 'register', title: 'Register' },
   ];
 
-  constructor(private flowbiteService: FlowbiteService) {}
+  constructor(
+    private flowbiteService: FlowbiteService,
+    private authService: AuthService
+  ) {
+    authService.isLogin.subscribe({
+      next: (isLogin) => {
+        this.localIsLogin = isLogin;
+      },
+    });
+  }
 
   ngOnInit(): void {
     this.flowbiteService.loadFlowbite((flowbite) => {
@@ -33,6 +43,6 @@ export class NavbarComponent implements OnInit {
   }
 
   logOut() {
-    // Implement logout logic here
+    this.authService.logOut();
   }
 }

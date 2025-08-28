@@ -16,11 +16,15 @@
     <div class="grow hidden w-full items-center desktop:flex justify-between desktop:w-auto" id="navbar-default">
       <ul class="font-medium flex flex-col mt-4 border border-gray-100 rounded-lg  desktop:flex-row desktop:space-x-8 rtl:space-x-reverse desktop:mt-0 desktop:border-0  dark:bg-gray-800 desktop:dark:bg-gray-900 dark:border-gray-700">
    
-        @for (page of pages; track $index) {
 
-            <li>
-              <a routerLinkActive="text-green-500"  [routerLink]="page.path" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 desktop:hover:bg-transparent desktop:border-0 desktop:hover:text-green-700 desktop:p-0 dark:text-white desktop:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white desktop:dark:hover:bg-transparent">{{page.title}}</a>
-            </li>
+        @if(localIsLogin){
+
+          @for (page of pages; track $index) {
+  
+              <li>
+                <a routerLinkActive="text-green-500"  [routerLink]="page.path" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 desktop:hover:bg-transparent desktop:border-0 desktop:hover:text-green-700 desktop:p-0 dark:text-white desktop:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white desktop:dark:hover:bg-transparent">{{page.title}}</a>
+              </li>
+          }
         }
 
      
@@ -38,16 +42,20 @@
         </li>
 
 
-        @for (page of authPages; track $index) {
+      @if(!localIsLogin){
+          @for (page of authPages; track $index) {
 <li>
           <a  routerLinkActive="text-green-500"  [routerLink]="page.path" class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 desktop:hover:bg-transparent desktop:border-0 desktop:hover:text-green-700 desktop:p-0 dark:text-white desktop:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white desktop:dark:hover:bg-transparent">{{page.title}}</a>
         </li>
         }
+      }
         
 
-        <li >
+      @if(localIsLogin){
+          <li >
             <span class="cursor-pointer" (click)="logOut()">logOut</span>
         </li>
+      }
        
       </ul>
     </div>
