@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite"; 
+
+
+/* !!! */
+@theme {
+    --breakpoint-desktop: 1000px;
+}
+
+  .my-pagination .ngx-pagination .current {
+    background: #10B981;
+  }
