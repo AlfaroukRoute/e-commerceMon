@@ -13,6 +13,7 @@ export const routes: Routes = [
     {path: "brands" , canActivate :[authGuard] ,loadComponent: () => import('./features/brands/brands.component').then(m => m.BrandsComponent)},
     {path: "login" , loadComponent: () => import('./features/login/login.component').then(m => m.LoginComponent)},
     {path: "register" , loadComponent: () => import('./features/register/register.component').then(m => m.RegisterComponent)},
+    {path: "reset-password" , loadComponent: () => import('./features/reset-password/reset-password.component').then(m => m.ResetPasswordComponent)},
     // product-details/456467867564 ==>>> id
     {path: "product-details/:id" ,canActivate :[authGuard] , loadComponent: () => import('./features/product-details/product-details.component').then(m => m.ProductDetailsComponent)},
 
