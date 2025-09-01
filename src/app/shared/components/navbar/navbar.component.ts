@@ -31,6 +31,8 @@ export class NavbarComponent implements OnInit {
   ) {
     authService.isLogin.subscribe({
       next: (isLogin) => {
+        console.log({isLogin} , "nav");
+
         this.localIsLogin = isLogin;
       },
     });

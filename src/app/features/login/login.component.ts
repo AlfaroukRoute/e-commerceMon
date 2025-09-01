@@ -18,9 +18,10 @@ import { AuthService } from '../../core/services/auth.service';
 export class LoginComponent {
   isLoading = false;
   private authService =  inject(AuthService)
+  private toastr = inject(ToastrService)
   constructor(
     // private authService: AuthService,
-    private toastr: ToastrService,
+    // private toastr: ToastrService,
     private router: Router
   ) {
     // authService. <

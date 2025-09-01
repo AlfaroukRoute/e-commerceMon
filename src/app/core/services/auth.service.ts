@@ -20,9 +20,18 @@ type LoginData = {
 })
 export class AuthService {
 
-    // isLogin.subscribe
-    //! isLogin.next()
-    isLogin = new BehaviorSubject<boolean>(false);
+
+
+  //! decoded func (login , register) token isLogin (true)
+  //! logOut token login isLogin(false)
+
+  //! token ==>>>> app con
+
+
+  // !!! isLogin.subscribe({}) nav
+  //! auth isLogin.getValue()
+  //! useDate = new 
+  isLogin = new BehaviorSubject<boolean>(false);
 
 
 

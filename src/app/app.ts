@@ -1,4 +1,11 @@
-import { Component, Inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
@@ -12,19 +19,18 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrl: './app.css',
 })
 export class App implements OnInit {
-  constructor(
-    private authService: AuthService,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {
-    if (isPlatformBrowser(platformId)) {
+  protected readonly title = signal('eCommerce');
+  private authService = inject(AuthService);
+  private platformId = inject(PLATFORM_ID);
+
+  ngOnInit(): void {
+    console.log("hiiiii");
+    // ! cookies 
+    if (isPlatformBrowser(this.platformId)) {
       const token = localStorage.getItem('token');
       if (token) {
         this.authService.decodeToken(token);
-        
       }
     }
   }
-  protected readonly title = signal('eCommerce');
-
-  ngOnInit(): void {}
 }
