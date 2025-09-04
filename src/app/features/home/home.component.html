@@ -28,7 +28,8 @@
     </div>
     }
     }@else {
-    @for (product of products; track $index) {
+      <input type="text" [(ngModel)]="term">
+    @for (product of products | filterList : term; track $index) {
     <app-product-card [product]="product"></app-product-card>
     }
     }

@@ -54,6 +54,7 @@ export class ResetPasswordComponent {
     // !!! value ==>
     this.authService
       .forgetPassword({ email: this.forgetPasswordGroup.value.email! })
+      
       .subscribe({
         next: (res) => {
           this.step = 2;
@@ -91,7 +92,7 @@ export class ResetPasswordComponent {
     }).subscribe({
       next: (res) => {
         this.toaster.success('Password Reset Successfully', '', { timeOut: 1500 });
-        localStorage.setItem('token', res.token);
+        // localStorage.setItem('token', res.token);
         this.authService.decodeToken(res.token);
         this.router.navigate(['/login']);
       },

@@ -56,7 +56,7 @@ export class RegisterComponent {
         // !!! navigate home page 
         console.log("Registration successful:", response);
         const token = response.token;
-        localStorage.setItem('token', token);
+        // localStorage.setItem('token', token);
         this.authService.decodeToken(token);
 
 

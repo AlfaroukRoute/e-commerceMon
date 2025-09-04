@@ -99,6 +99,7 @@ export class AuthService {
   logOut(){
     this.isLogin.next(false);
     localStorage.removeItem('token');
+  
 
     // !!! navigate login (home , product)
     this.router.navigate(['/login']);

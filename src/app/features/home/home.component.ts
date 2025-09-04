@@ -4,14 +4,20 @@ import { ProductService } from '../../core/services/product.service';
 import { Category, Product } from '../../core/models/api.interface';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { CategoryService } from '../../core/services/category.service';
+import { FilterListPipe } from '../../shared/pipes/filter-list-pipe';
+import { FormsModule } from '@angular/forms';
+import { CartService } from '../../core/services/cart.service';
+import { ToastrService } from 'ngx-toastr';
+import { response } from 'express';
 
 @Component({
   selector: 'app-home',
-  imports: [ProductCardComponent, CarouselModule],
+  imports: [ProductCardComponent, CarouselModule , FilterListPipe , FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
+  term : string = ''
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,
@@ -52,7 +58,9 @@ export class HomeComponent implements OnInit {
   categories: Category[] = [];
   constructor(
     private productService: ProductService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private cartService : CartService ,
+    private toaster : ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -71,6 +79,9 @@ export class HomeComponent implements OnInit {
       next: (response) => {
         this.isLoading = false;
         console.log(response.data);
+
+        // response.data.map((product) => {})
+
         this.products = response.data;
       },
 
@@ -95,4 +106,7 @@ export class HomeComponent implements OnInit {
       },
     });
   }
+
+
+
 }
