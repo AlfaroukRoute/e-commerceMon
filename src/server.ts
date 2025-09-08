@@ -39,8 +39,13 @@ app.use(
  * Handle all other requests by rendering the Angular application.
  */
 app.use((req, res, next) => {
+  console.log(`Handling request for ${req.url}`);
+  
+
+
+
   angularApp
-    .handle(req)
+    .handle(req , )
     .then((response) =>
       response ? writeResponseToNodeResponse(response, res) : next(),
     )

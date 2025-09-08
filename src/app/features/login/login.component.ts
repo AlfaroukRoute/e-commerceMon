@@ -50,11 +50,11 @@ export class LoginComponent {
     this.authService.login(this.loginGroup.value).subscribe({
       next: (response) => {
         this.isLoading = false;
-        this.toastr.success('Registration successful!', 'Success');
+        this.toastr.success('login successful!', 'Success');
         // !!! navigate home page
-        console.log('Registration successful:', response);
+        console.log('login successful:', response);
           const token = response.token;
-        // localStorage.setItem('token', token);
+        localStorage.setItem('token', token);
         this.authService.decodeToken(token);
         this.loginGroup.reset();
         // /home/1254/view/edit

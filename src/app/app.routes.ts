@@ -6,7 +6,7 @@ export const routes: Routes = [
 
     {path : "" , redirectTo : "home" , pathMatch : "full"},
     // !! 
-    {path: "home"   , loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent)},
+    {path: "home"   , canActivate: [authGuard], loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent)},
     {path: "products"  , loadComponent: () => import('./features/product/product.component').then(m => m.ProductComponent)},
     {path: "cart"  ,loadComponent: () => import('./features/cart/cart.component').then(m => m.CartComponent)},
     {path: "categories"  , loadComponent: () => import('./features/categories/categories.component').then(m => m.CategoriesComponent)},

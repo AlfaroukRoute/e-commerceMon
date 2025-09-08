@@ -1,10 +1,10 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
 
-
-// !! page ==> csr , ssr , static site generation (((())))
+//! 
+// !! page ==> client sr , server sr , static site generation (((())))
 export const serverRoutes: ServerRoute[] = [
   {
     path: '**',
-    renderMode: RenderMode.Prerender
+    renderMode: RenderMode.Server,
   }
 ];
